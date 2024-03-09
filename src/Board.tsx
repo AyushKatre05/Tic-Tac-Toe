@@ -117,7 +117,7 @@ const Board: React.FC<BoardProps> = () => {
           const winner = checkWinner(newBoard);
           if (winner === currentPlayer) {
             hints.push(
-              <div key={i} className="text-green-500">
+              <div key={i} className="text-green-500  font-extrabold ">
                 <p>If you place {currentPlayer === 'X' ? 'X' : 'O'} at position {i + 1}, you'll win!</p>
               </div>
             );
@@ -153,31 +153,31 @@ const Board: React.FC<BoardProps> = () => {
     backgroundColor: '#ddd',
     padding: '10px',
   };
-
+            
   return (
-    <div className="flex flex-col items-center justify-center h-[80vh]">
+    <div className="flex flex-col items-center justify-center h-[72vh]">
       <div style={boardStyle} className="mb-4">
         {squares}
       </div>
       {showModal && (
-        <div className="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white rounded-lg p-8">
-            <h2 className="text-2xl mb-4">{winner === 'Draw' ? "It's a draw!" : `${winner} wins!`}</h2>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div className="bg-white p-8 rounded-lg shadow-lg">
+        <h2 className="text-2xl mb-4">{winner === 'Draw' ? "It's a draw!" : `${winner} wins!`}</h2>
             <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={playAgain}>Play Again</button>
-          </div>
         </div>
+      </div>
       )}
-      <div className="mb-4">
-        <button onClick={undoMove} className="bg-blue-500 text-white px-4 py-2 rounded mr-2">Undo Move</button>
-        {!playWithComputer && ( // Render the hint button only if not playing with computer
-          <label>
+      <div className="mb-4 flex justify-center items-center">
+        <button onClick={undoMove} className="bg-red-500 text-white px-4 py-2 rounded mr-2">Undo Move</button>
+        {!playWithComputer && ( 
+          <label className='flex gap-2'>
             <input type="checkbox" checked={hintsEnabled} onChange={() => setHintsEnabled(!hintsEnabled)} />
-            Show Hints
+            <span className='text-white font-extrabold'>Show Hints</span>
           </label>
         )}
       </div>
       <div className="mb-4">
-        <label className="mr-2">Board Size:</label>
+        <label className="mr-2 text-white font-extrabold">Board Size:</label>
         <select onChange={(e) => changeBoardSize(parseInt(e.target.value))} className="border border-gray-400 rounded px-2 py-1">
           <option value="3">3x3</option>
           <option value="4">4x4</option>
@@ -189,7 +189,7 @@ const Board: React.FC<BoardProps> = () => {
         <div className="mb-4">
           <label className="inline-flex items-center">
             <input type="checkbox" checked={playWithComputer} onChange={togglePlayWithComputer} className="form-checkbox h-5 w-5 text-blue-600" />
-            <span className="ml-2 text-gray-700">Play with Computer</span>
+            <span className="ml-2 text-white font-extrabold">Play with Computer</span>
           </label>
         </div>
       )}
